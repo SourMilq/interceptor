@@ -21,7 +21,7 @@
     "password": {
         "ENV":"DATABASE_PASS"
     },
-    "database": "sourMilqDb",
+    "database": "heroku_091d6c6d853cd49",
     "driver": "mysql"
   }
 }
