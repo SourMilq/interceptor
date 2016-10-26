@@ -6,7 +6,7 @@ module.exports = function (config) {
     console.log("config.db ", config.db);
     if (process.env.HEROKU_POSTGRESQL_YELLOW_URL){
         var match = process.env.HEROKU_POSTGRESQL_YELLOW_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
-        sequelize = new Sequelize(match[5], match[1], match[2], {
+        return new Sequelize(match[5], match[1], match[2], {
             dialect:  'postgres',
             protocol: 'postgres',
             port:     match[4],
