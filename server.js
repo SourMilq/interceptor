@@ -40,6 +40,7 @@ var restifyLogger = new bunyan({
     ]
 });
 
+
 var server = restify.createServer({
     log: restifyLogger,
 });
