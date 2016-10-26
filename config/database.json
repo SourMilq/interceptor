@@ -13,11 +13,17 @@
     "database": "sourMilqDbTest",
     "driver": "mysql"
   },
-  "travis": {
-    "host": "localhost",
-    "user": "root",
-    "password": "",
-    "database": "sourMilqDbTest",
+  "heroku": {
+    "host": {
+        "ENV":"DATABASE_URL"
+    },
+    "user": {
+        "ENV":"DATABASE_USER"
+    },
+    "password": {
+        "ENV":"DATABASE_PASS"
+    },
+    "database": "sourMilqDb",
     "driver": "mysql"
   }
 }
