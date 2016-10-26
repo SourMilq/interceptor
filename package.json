@@ -45,6 +45,7 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "password-hash": "^1.2.2",
+    "pg": "^6.1.0",
     "request": "^2.54.0",
     "restify": "^3.0.1",
     "semver": "^4.3.3",
