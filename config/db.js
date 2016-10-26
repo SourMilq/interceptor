@@ -5,6 +5,7 @@ var Sequelize = require('sequelize');
 module.exports = function (config) {
     console.log("config.db ", config.db);
     if (process.env.HEROKU_POSTGRESQL_YELLOW_URL){
+        
         return new Sequelize("dm45v0ovsn50j", "jrvlibviistvhv", "UFylZssdZWn0JD3f5vxljaioAK", {
             dialect: 'postgres',
             protocol: 'postgres',
