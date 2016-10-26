@@ -5,13 +5,16 @@ var Sequelize = require('sequelize');
 module.exports = function (config) {
     console.log("config.db ", config.db);
     if (process.env.HEROKU_POSTGRESQL_YELLOW_URL){
-        
-        return new Sequelize("dm45v0ovsn50j", "jrvlibviistvhv", "UFylZssdZWn0JD3f5vxljaioAK", {
-            dialect: 'postgres',
+        var match = process.env.HEROKU_POSTGRESQL_YELLOW_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+        sequelize = new Sequelize(match[5], match[1], match[2], {
+            dialect:  'postgres',
             protocol: 'postgres',
-            port: 5432,
-            host: 'ec2-54-243-203-143.compute-1.amazonaws.com',
-            logging: false
+            port:     match[4],
+            host:     match[3],
+            logging: false,
+            dialectOptions: {
+                ssl: true
+            }
         });
     }else {
         return new Sequelize(config.db.database, config.db.user, config.db.password, {
