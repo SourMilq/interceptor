@@ -10,6 +10,8 @@ var auth = JSON.parse(fs.readFileSync(path.join(__dirname, 'auth.json')));
 var env = process.env.envName || 'local';
 
 var loadEnvVars = function (config) {
+    console.log("process.env ", process.env);
+    console.log("process.env.envName ", process.env.envName);
     return _.mapValues(config, function (val) {
         if (_.isObject(val) && _.has(val, 'ENV')) {
             return process.env[val.ENV];
@@ -23,5 +25,6 @@ config.db = loadEnvVars(dbConfigs[env]);
 config.auth = loadEnvVars(auth[env]);
 config.envName = env;
 
+console.log(' --- Config ' + config + ' --- ');
 console.log(' --- Configuring for ' + config.name + ' --- ');
 module.exports = config;
