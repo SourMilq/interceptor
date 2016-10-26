@@ -9,6 +9,8 @@
   },
   "heroku": {
     "name": "Heroku deployment",
-    "port": 3000
+    "port": {
+        "ENV":"process.env.PORT"
+    }
   }
 }
