@@ -9,6 +9,10 @@ var dbConfigs = JSON.parse(fs.readFileSync(path.join(__dirname, 'database.json')
 var auth = JSON.parse(fs.readFileSync(path.join(__dirname, 'auth.json')));
 var env = process.env.envName || 'local';
 
+if (process.env.CLEARDB_DATABASE_URL != undefined){
+    env = 'heroku';
+}
+
 var loadEnvVars = function (config) {
     console.log("process.env ", process.env);
     console.log("process.env.envName ", process.env.envName);
