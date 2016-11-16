@@ -13,7 +13,7 @@
   * [3. Items](#3-items)
     + [3.1 Add item to list: [POST] `/v1/list/:listId/item/add`](#31-add-item-to-list-post-v1listlistiditemadd)
     + [3.2 Check off grocery item: [POST] `/v1/list/:listId/item/:itemId/done`](#32-check-off-grocery-item-post-v1listlistiditemitemiddone)
-    + [3.3 Delete item from list: [POST] `/v1/list/:listId/item/:itemId/`]()
+    + [3.3 Delete item from list: [POST] `/v1/list/:listId/item/:itemId/`](#33-delete-item-from-list-post-v1listlistiditemitemid)
 
 ## 1. Users
 ### 1.1 List all users: [GET] `/v1/users/`
