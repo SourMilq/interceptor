@@ -10,6 +10,9 @@
     + [2.2 View a user: [GET] `/v1/list/:listId`](#22-view-a-user-get-v1listlistid)
     + [2.3 [OFFLINE] Create a list: [POST] `/v1/user/:userId/list/create`](#23-offline-create-a-list-post-v1useruseridlistcreate)
     + [2.4 View a user: [DEL] `/v1/user/:userId/list/:listId`](#24-view-a-user-del-v1useruseridlistlistid)
+  * [3. Items](#2-lists)
+    + [3.1 List all lists for a given user: [GET] `/v1/lists/`]()
+    + [3.2 View a user: [GET] `/v1/list/:listId`]()
 
 ## 1. Users
 ### 1.1 List all users: [GET] `/v1/users/`
@@ -20,7 +23,6 @@ Gets all the users. Only accepts admin tokens.
 
 #### Request:
 - Header: `{'Authorization': 'Bearer TOKEN'}`
-- Body: `{}`
 
 #### Response:
 ```javascript
@@ -51,7 +53,6 @@ Get the user associated with the token.
 
 #### Request:
 - Header: `{'Authorization': 'Bearer TOKEN'}`
-- Body: `{}`
 
 #### Response:
 ```javascript
@@ -111,7 +112,6 @@ Deletes the user with the given `id`.
 
 #### Request:
 - Header: `{'Authorization': 'Bearer TOKEN'}`
-- Body: `{}`
 
 #### Response:
 - body: `{}`
@@ -127,7 +127,6 @@ Get all the lists for a given user.
 
 #### Request:
 - Header: `{'Authorization': 'Bearer TOKEN'}`
-- Body: `{}`
 
 #### Response:
 ```javascript
@@ -156,7 +155,6 @@ Get specified list for a user.
 
 #### Request:
 - Header: `{'Authorization': 'Bearer TOKEN'}`
-- Body: `{}`
 
 #### Response:
 ```javascript
@@ -215,10 +213,82 @@ Deletes the list with the given `id`.
 #### Request:
 - Header: `{'Authorization': 'Bearer TOKEN'}`
 - Params: `id` of the user to be deleted.
-- Body: `{}`
 
 #### Response:
 - body: `{}`
 #### Response Status Codes:
 - Success Code: `{204: 'NoContent'}`
 - Error Code: `{403: 'Forbidden', 404: 'NotFoundError'}`
+
+## 3. Items
+### 3.1 Add item to list: [POST] `/v1/list/:listId/item/add`
+#### Description
+Add an item to the given list
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+
+#### Response:
+```javascript
+{
+    "list": {
+        "id": [INTEGER],
+        "name": [STRING],
+        "description": [STRING],
+        "createdAt": [STRING],
+        "updatedAt": [STRING],
+        "userId": [INTEGER],
+        "items": [
+            {
+                "id": [INTEGER],
+                "name": [STRING],
+                "quantity": [INTEGER],
+                "price": [INTEGER],
+                "createdAt": [STRING],
+                "updatedAt": [STRING],
+                "listId": [INTEGER]
+            },
+        ]
+  }
+}
+```
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
+
+### 3.2 Check off grocery item: [POST] `/v1/list/:listId/item/:itemId/done`
+#### Description
+Move item from the grocery list to the fridge list
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+
+#### Response:
+```javascript
+{
+    "lists": [
+        {
+            "id": [INTEGER],
+            "name": "Fridge",
+            "description": [STRING],
+            "createdAt": [STRING],
+            "updatedAt": [STRING],
+            "userId": [INTEGER]
+        },
+        {
+            "id": [INTEGER],
+            "name": "Grocery List",
+            "description": [STRING],
+            "createdAt": [STRING],
+            "updatedAt": [STRING],
+            "userId": [INTEGER]
+        }
+    ]
+}
+
+```
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
