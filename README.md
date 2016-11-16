@@ -1,15 +1,15 @@
 # API Documentation
 - [API Documentation](#api-documentation)
   * [1. Users](#1-users)
-    + [1.1 List all users: [GET] `/v1/users/`](#11-list-all-users---get----v1-users--)
-    + [1.2 View a user: [GET] `/v1/user/login`](#12-view-a-user---get----v1-user-login-)
-    + [1.3 View a user: [POST] `/v1/user/create`](#13-view-a-user---post----v1-user-create-)
-    + [1.4 View a user: [DEL] `/v1/user/delete/:id`](#14-view-a-user---del----v1-user-delete--id-)
+    + [1.1 List all users: [GET] `/v1/users/`](#11-list-all-users-get-v1users)
+    + [1.2 View a user: [GET] `/v1/user/login`](#12-view-a-user-get-v1userlogin)
+    + [1.3 View a user: [POST] `/v1/user/create`](#13-view-a-user-post-v1usercreate)
+    + [1.4 View a user: [DEL] `/v1/user/delete/:id`](#14-view-a-user-del-v1userdeleteid)
   * [2. Lists](#2-lists)
-    + [2.1 List all lists for a given user: [GET] `/v1/lists/`](#21-list-all-lists-for-a-given-user---get----v1-lists--)
-    + [2.2 View a user: [GET] `/v1/list/:listId`](#22-view-a-user---get----v1-list--listid-)
-    + [2.3 [OFFLINE] Create a list: [POST] `/v1/user/:userId/list/create`](#23--offline--create-a-list---post----v1-user--userid-list-create-)
-    + [2.4 View a user: [DEL] `/v1/user/:userId/list/:listId`](#24-view-a-user---del----v1-user--userid-list--listid-)
+    + [2.1 List all lists for a given user: [GET] `/v1/lists/`](#21-list-all-lists-for-a-given-user-get-v1lists)
+    + [2.2 View a user: [GET] `/v1/list/:listId`](#22-view-a-user-get-v1listlistid)
+    + [2.3 [OFFLINE] Create a list: [POST] `/v1/user/:userId/list/create`](#23-offline-create-a-list-post-v1useruseridlistcreate)
+    + [2.4 View a user: [DEL] `/v1/user/:userId/list/:listId`](#24-view-a-user-del-v1useruseridlistlistid)
 
 ## 1. Users
 ### 1.1 List all users: [GET] `/v1/users/`
