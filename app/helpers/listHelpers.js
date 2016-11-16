@@ -25,13 +25,6 @@ module.exports = function (models, authenticationHelpers) {
         });
     };
 
-    // Expects a list where the name is not already existing:
-    // {
-    //     "list": {
-    //         "name": "List Name",
-    //         "description": "List description"
-    //     }
-    // }
     var createList = function createList(user, listInfo){
         return user.getLists({where: {name: listInfo.name}})
             .then(function(list){
