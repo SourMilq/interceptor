@@ -256,7 +256,7 @@ Add an item to the given list
                 "listId": [INTEGER]
             },
         ]
-  }
+    }
 }
 ```
 #### Response Status Codes:
@@ -274,24 +274,25 @@ Move item from the grocery list to the fridge list
 #### Response:
 ```javascript
 {
-    "lists": [
-        {
-            "id": [INTEGER],
-            "name": "Fridge",
-            "description": [STRING],
-            "createdAt": [STRING],
-            "updatedAt": [STRING],
-            "userId": [INTEGER]
-        },
-        {
-            "id": [INTEGER],
-            "name": "Grocery List",
-            "description": [STRING],
-            "createdAt": [STRING],
-            "updatedAt": [STRING],
-            "userId": [INTEGER]
-        }
-    ]
+    "list": {
+        "id": [INTEGER],
+        "name": [STRING],
+        "description": [STRING],
+        "createdAt": [STRING],
+        "updatedAt": [STRING],
+        "userId": [INTEGER],
+        "items": [
+            {
+                "id": [INTEGER],
+                "name": [STRING],
+                "quantity": [INTEGER],
+                "price": [INTEGER],
+                "createdAt": [STRING],
+                "updatedAt": [STRING],
+                "listId": [INTEGER]
+            },
+        ]
+    }
 }
 
 ```
