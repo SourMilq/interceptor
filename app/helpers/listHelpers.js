@@ -25,6 +25,20 @@ module.exports = function (models, authenticationHelpers) {
         });
     };
 
+    var getGroceryList = function getGroceryList(user){
+        return user.getLists({where: {name: "Grocery List"},
+        include: [
+            { model: models.Item }
+        ]});
+    };
+
+    var getFridgeList = function getFridgeList(user){
+        return user.getLists({where: {name: "Fridge"},
+        include: [
+            { model: models.Item }
+        ]});
+    };
+
     var createList = function createList(user, listInfo){
         return user.getLists({where: {name: listInfo.name}})
             .then(function(list){
@@ -44,6 +58,8 @@ module.exports = function (models, authenticationHelpers) {
     return {
         getLists: getLists,
         getListById: getListById,
-        createList: createList
+        createList: createList,
+        getGroceryList: getGroceryList,
+        getFridgeList: getFridgeList
     };
 };

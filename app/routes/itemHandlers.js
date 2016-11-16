@@ -41,6 +41,38 @@ module.exports = function (listHelpers, itemHelpers) {
         });
     };
 
+    var moveItem = function moveItem(req, res, next){
+        listHelpers.getGroceryList(req.user).then(function(gList) {
+            if (gList.length === 0) {
+                throw new errors.ListNotFoundError();
+            } else {
+                listHelpers.getFridgeList(req.user).then(function(fList){
+                    if (fList.length === 0) {
+                        throw new errors.ListNotFoundError();
+                    } else {
+                        itemHelpers.getItemById(gList[0], req.params.itemId).then(function(item){
+                            if (item.length === 0){
+                                throw new errors.ItemNotFoundError();
+                            }
+
+                            fList[0].addItem(item);
+                            itemHelpers.deleteItemById(gList[0], item.id).then(function(){
+                                listHelpers.getLists(req.user)
+                                    .then(function(lists){
+                                        res.json(200, {
+                                            "lists": lists
+                                        });
+                                        next();
+                                    });
+                            });
+                        });
+
+                    }
+                }).catch(errors.ItemNotFoundError, sendError(httpErrors.NotFoundError, next));
+            }
+        }).catch(errors.ListNotFoundError, sendError(httpErrors.NotFoundError, next));
+    };
+
     var deleteItem = function deleteItem(req, res, next){
         listHelpers.getListById(req.user, req.params.listId)
             .then(function(lists) {
@@ -52,6 +84,7 @@ module.exports = function (listHelpers, itemHelpers) {
                             if (items.length == 0){
                                 throw new errors.ItemNotFoundError(req.params.itemId);
                             } else {
+                                // TODO: move to helper
                                 items[0].destroy().then(function(){
                                     listHelpers.getListById(req.user, req.params.listId).then(function(lists){
                                         res.json(200, {"list": lists[0]});
@@ -66,6 +99,7 @@ module.exports = function (listHelpers, itemHelpers) {
 
     return {
         addItem: addItem,
+        moveItem: moveItem,
         deleteItem: deleteItem
     };
 };
