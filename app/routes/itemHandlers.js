@@ -46,6 +46,7 @@ module.exports = function (listHelpers, itemHelpers) {
             if (gList.length === 0) {
                 throw new errors.ListNotFoundError();
             } else {
+                var gListId = gList[0].id;
                 listHelpers.getFridgeList(req.user).then(function(fList){
                     if (fList.length === 0) {
                         throw new errors.ListNotFoundError();
@@ -56,17 +57,15 @@ module.exports = function (listHelpers, itemHelpers) {
                             }
 
                             fList[0].addItem(item);
-                            itemHelpers.deleteItemById(gList[0], item.id).then(function(){
-                                listHelpers.getLists(req.user)
-                                    .then(function(lists){
-                                        res.json(200, {
-                                            "lists": lists
-                                        });
-                                        next();
+                            itemHelpers.deleteItemById(gList[0], item.id).then(function(deleted){
+                                listHelpers.getListById(req.user, gListId).then(function(lists){
+                                    res.json(200, {
+                                        "list": lists[0]
                                     });
+                                    next();
+                                });
                             });
                         });
-
                     }
                 }).catch(errors.ItemNotFoundError, sendError(httpErrors.NotFoundError, next));
             }

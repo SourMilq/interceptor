@@ -39,8 +39,9 @@ module.exports = function (models, authenticationHelpers) {
         return getItemById(list, itemId).then(function(item){
             if (item.length > 0){
                 return item[0].destroy();
+            } else {
+                return null;
             }
-            return null;
         });
     }
 
