@@ -10,9 +10,9 @@
     + [2.2 View a user: [GET] `/v1/list/:listId`](#22-view-a-user-get-v1listlistid)
     + [2.3 [OFFLINE] Create a list: [POST] `/v1/user/:userId/list/create`](#23-offline-create-a-list-post-v1useruseridlistcreate)
     + [2.4 View a user: [DEL] `/v1/user/:userId/list/:listId`](#24-view-a-user-del-v1useruseridlistlistid)
-  * [3. Items](#2-lists)
-    + [3.1 List all lists for a given user: [GET] `/v1/lists/`]()
-    + [3.2 View a user: [GET] `/v1/list/:listId`]()
+  * [3. Items](#3-items)
+    + [3.1 Add item to list: [POST] `/v1/list/:listId/item/add`](#31-add-item-to-list-post-v1listlistiditemadd)
+    + [3.2 Check off grocery item: [POST] `/v1/list/:listId/item/:itemId/done`](#32-check-off-grocery-item-post-v1listlistiditemitemiddone)
 
 ## 1. Users
 ### 1.1 List all users: [GET] `/v1/users/`
