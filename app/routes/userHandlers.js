@@ -42,6 +42,11 @@ module.exports = function (userHelpers, listHelpers, authenticationHelpers) {
             userHelpers.createUser(userInfo)
                 .then(function (user) {
                     listHelpers.createList(user, {
+                        "name": "Fridge",
+                        "description": "Content in the fridge.",
+                    });
+
+                    listHelpers.createList(user, {
                         "name": "Grocery List",
                         "description": "Default shopping list.",
                     }).then(function(list){

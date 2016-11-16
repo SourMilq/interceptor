@@ -109,9 +109,9 @@ Deletes the user with the given `id`.
 - Error Code: `{403: 'Forbidden', 404: 'NotFoundError'}`
 
 ## 2. Lists
-### 2.1 List all lists for a given user: [GET] `/v1/user/:userId/lists/`
+### 2.1 List all lists for a given user: [GET] `/v1/lists/`
 #### Description
-Gets all the users. Only accepts admin tokens.
+Get all the lists for a given user.
 - Authentication: `[Admin, User]`
 
 #### Request:
@@ -124,8 +124,11 @@ Gets all the users. Only accepts admin tokens.
     list: [
         {
             "id": [INTEGER],
+            "userId": [INTEGER],
             "name": [STRING],
-            "description": [STRING]
+            "description": [STRING],
+            "updatedAt": [STRING],
+            "createdAt": [STRING]
         }
     ]
 }
@@ -134,9 +137,9 @@ Gets all the users. Only accepts admin tokens.
 - Success Code: `{200: 'Success'}`
 - Error Code: `{403: 'Forbidden'}`
 
-### 2.2 View a user: [GET] `/v1/user/:userId/list/:listId`
+### 2.2 View a user: [GET] `/v1/list/:listId`
 #### Description
-Get the user with the specified `id`.
+Get specified list for a user.
 - Authentication: `[Admin, User]`
     - `token`: User token must be the one assigned to the target user or an admin token.
 
@@ -148,6 +151,9 @@ Get the user with the specified `id`.
 ```javascript
 {
     "id": [INTEGER],
+    "userId": [INTEGER],
+    "description": [STRING],
+    "name": [STRING],
     "description": [STRING],
     "items": [
         {
@@ -161,7 +167,7 @@ Get the user with the specified `id`.
 - Success Code: `{200: 'Success'}`
 - Error Code: `{403: 'Forbidden', 404: 'NotFoundError'}`
 
-### 2.3 Create a list: [POST] `/v1/user/:userId/list/create`
+### 2.3 [OFFLINE] Create a list: [POST] `/v1/user/:userId/list/create`
 #### Description
 Creates a new user.
 - Authentication: `[Admin]`
