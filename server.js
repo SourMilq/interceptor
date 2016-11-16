@@ -10,10 +10,12 @@ var _ = require('lodash');
 // Security layer
 var authenticationHelpers = require('./app/common/authentication')(config);
 
+// Helpers for the endpoints
 var userHelpers = require('./app/helpers/userHelpers')(models, authenticationHelpers);
 var listHelpers = require('./app/helpers/listHelpers')(models, authenticationHelpers);
 var itemHelpers = require('./app/helpers/itemHelpers')(models, authenticationHelpers);
 
+// Functions to handle endpoint logic
 var userHandlers = require('./app/routes/userHandlers')(userHelpers, listHelpers, authenticationHelpers);
 var listHandlers = require('./app/routes/listHandlers')(listHelpers);
 var itemHandlers = require('./app/routes/itemHandlers')(listHelpers, itemHelpers);
@@ -77,11 +79,11 @@ server.use(function (req, res, next) {
 
 // Routes
 // User
-server.get('/v1/users/', passport.authenticate(['basic', 'bearer'], {session: false}), userHandlers.index); // User route: get all the users
-server.get('/v1/user/login', passport.authenticate(['basic', 'bearer'], {session: false}), userHandlers.view); // User route: get user by the id
-server.post('/v1/user/', userHandlers.login); // User route: get user by the id
-server.post('/v1/user/create/', userHandlers.createUser); // User route: create a user
-server.del('/v1/user/delete/:id', passport.authenticate(['basic', 'bearer'], {session: false}), userHandlers.del); // User route: create a user
+server.get('/v1/users/', passport.authenticate(['basic', 'bearer'], {session: false}), userHandlers.index);
+server.get('/v1/user/login', passport.authenticate(['basic', 'bearer'], {session: false}), userHandlers.view);
+server.post('/v1/user/', userHandlers.login);
+server.post('/v1/user/create/', userHandlers.createUser);
+server.del('/v1/user/delete/:id', passport.authenticate(['basic', 'bearer'], {session: false}), userHandlers.del);
 
 // List
 server.get('/v1/lists/', passport.authenticate(['basic', 'bearer'], {session: false}), listHandlers.index);
