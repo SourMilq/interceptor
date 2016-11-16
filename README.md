@@ -100,7 +100,6 @@ Deletes the user with the given `id`.
 
 #### Request:
 - Header: `{'Authorization': 'Bearer TOKEN'}`
-- Params: `id` of the user to be deleted.
 - Body: `{}`
 
 #### Response:
