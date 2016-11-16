@@ -35,9 +35,19 @@ module.exports = function (models, authenticationHelpers) {
         );
     }
 
+    var deleteItemById = function deleteItemById(list, itemId){
+        return getItemById(list, itemId).then(function(item){
+            if (item.length > 0){
+                return item[0].destroy();
+            }
+            return null;
+        });
+    }
+
     return {
         createItem: createItem,
         getItemById: getItemById,
-        getItemByName: getItemByName
+        getItemByName: getItemByName,
+        deleteItemById: deleteItemById
     };
 };
