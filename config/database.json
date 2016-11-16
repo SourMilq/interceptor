@@ -2,7 +2,7 @@
   "local": {
     "host": "localhost",
     "user": "root",
-    "password": "",
+    "password": "password",
     "database": "sourmilq",
     "driver": "mysql"
   },
