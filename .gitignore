@@ -30,5 +30,8 @@ node_modules
 # ngrok should not be version controlled
 ngrok
 
-# web storm .idea 
+# json recipe files should not be committed
+scripts/recipe/*.json
+
+# web storm .idea
 .idea
