@@ -8,6 +8,13 @@ var validateParams = require('../common/validateParams');
 
 module.exports = function (recipeHelpers) {
 
+    var index = function index(req, res, next){
+        recipeHelpers.getRecipies().then(function(recipies){
+            res.json({"recipies": [recipies]});
+            next();
+        });
+    }
+
     var upload = function upload(req, res, next){
         var recipeInfo = {
             "sourceUrl": req.body.sourceUrl,
@@ -29,6 +36,7 @@ module.exports = function (recipeHelpers) {
     }
 
     return {
+        index: index,
         upload: upload
     };
 };

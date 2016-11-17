@@ -91,7 +91,7 @@ class Uploader:
 
                 pprint(result)
 
-                requests.post('http://ec2-35-163-95-143.us-west-2.compute.amazonaws.com:3000/v1/recipe/upload', headers=headers, data=json.dumps(result))
+                requests.post('http://localhost:3000/v1/recipe/upload', headers=headers, data=json.dumps(result))
 
 if __name__ == "__main__":
     # p = Parser(218586+200);
