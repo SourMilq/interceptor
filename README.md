@@ -15,6 +15,8 @@
     + [3.2 Check off grocery item: [POST] `/v1/list/:listId/item/:itemId/done`](#32-check-off-grocery-item-post-v1listlistiditemitemiddone)
     + [3.3 Delete item from list: [POST] `/v1/list/:listId/item/:itemId/`](#33-delete-item-from-list-post-v1listlistiditemitemid)
     + [3.4 Update expiration: [POST] `/v1/list/:listId/item/:itemId/update`](#34-update-expiration-post-v1listlistiditemitemidupdate)
+  * [4. Recipes](#4-recipes)
+      + [4.1 Get all the recipes in the system: [POST] `/v1/recipe/`](#41-get-all-the-recipes-in-the-system-post-v1recipes)
 
 ## 1. Users
 ### 1.1 List all users: [GET] `/v1/users/`
@@ -378,6 +380,39 @@ Update an expiration date
             },
         ]
     }
+}
+```
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
+
+## 4. Recipes
+### 4.1 Get all the recipes in the system: [POST] `/v1/recipe/`
+#### Description
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+
+#### Response:
+```javascript
+{
+    "recipes": [
+        {
+            "id": [INTEGER],
+            "sourceUrl": [STRING],
+            "cheap": [BOOLEAN],
+            "vegan": [BOOLEAN],
+            "cookingMinutes": [INTEGER],
+            "title": [STRING],
+            "dairyFree": [BOOLEAN],
+            "preparationMinutes": [INTEGER],
+            "extendedIngredients": [STRING],
+            "vegetarian": [BOOLEAN],
+            "createdAt": [STRING],
+            "updatedAt": [STRING]
+        },
+    ]
 }
 ```
 #### Response Status Codes:

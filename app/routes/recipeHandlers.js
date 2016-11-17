@@ -9,8 +9,8 @@ var validateParams = require('../common/validateParams');
 module.exports = function (recipeHelpers) {
 
     var index = function index(req, res, next){
-        recipeHelpers.getRecipies().then(function(recipies){
-            res.json({"recipies": [recipies]});
+        recipeHelpers.getRecipes().then(function(recipes){
+            res.json({"recipes": recipies});
             next();
         });
     }

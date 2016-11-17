@@ -5,7 +5,7 @@ var errors = require('../common/errors');
 
 module.exports = function (models, authenticationHelpers) {
 
-    var getRecipies = function getRecipies(){
+    var getRecipes = function getRecipes(){
         return models.Recipe.findAll();
     }
 
@@ -14,7 +14,7 @@ module.exports = function (models, authenticationHelpers) {
     }
 
     return {
-        getRecipies: getRecipies,
+        getRecipes: getRecipes,
         upload: upload
     };
 };
