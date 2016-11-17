@@ -10,7 +10,7 @@ module.exports = function (recipeHelpers) {
 
     var index = function index(req, res, next){
         recipeHelpers.getRecipes().then(function(recipes){
-            res.json({"recipes": recipies});
+            res.json({"recipes": recipes});
             next();
         });
     }
