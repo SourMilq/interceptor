@@ -8,11 +8,7 @@ module.exports = function (models, authenticationHelpers) {
 
     // Creates a single item with the item info
     var createItem = function createItem(itemInfo){
-        return models.Item.create({
-            name: itemInfo.name,
-            quantity: itemInfo.quantity,
-            price: itemInfo.price,
-        });
+        return models.Item.create(itemInfo);
     };
 
     var getItemById = function getItemById(list, itemId){
