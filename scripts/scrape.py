@@ -36,7 +36,12 @@ class Parser:
         with open(filename, 'w') as outfile:
             json.dump(data, outfile)
 
+# class Purifier:
+#     def __init__(self):
+#
+#     def
+
 if __name__ == "__main__":
-    p = Parser(218586+100);
+    p = Parser(218586+200);
     for i in range(0, 100):
         p.parse()
