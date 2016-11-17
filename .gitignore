@@ -35,3 +35,6 @@ scripts/recipe/*.json
 
 # web storm .idea
 .idea
+
+# ignore the db config changes
+config/database.json
