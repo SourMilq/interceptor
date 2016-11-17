@@ -92,6 +92,7 @@ server.post('/v1/list/create', passport.authenticate(['basic', 'bearer'], {sessi
 server.del('/v1/list/:listId', passport.authenticate(['basic', 'bearer'], {session: false}), listHandlers.del);
 
 // Item
+server.post('/v1/list/:listId/item/:itemId/update', passport.authenticate(['basic', 'bearer'], {session: false}), itemHandlers.updateItem);
 server.post('/v1/list/:listId/item/add', passport.authenticate(['basic', 'bearer'], {session: false}), itemHandlers.addItem);
 server.post('/v1/list/:listId/item/:itemId/done', passport.authenticate(['basic', 'bearer'], {session: false}), itemHandlers.moveItem);
 server.del('/v1/list/:listId/item/:itemId', passport.authenticate(['basic', 'bearer'], {session: false}), itemHandlers.deleteItem);

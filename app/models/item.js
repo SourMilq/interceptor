@@ -6,6 +6,7 @@ module.exports = function (sequelize, DataTypes) {
         name: {type: DataTypes.STRING},
         quantity: {type: DataTypes.INTEGER},
         price: {type: DataTypes.INTEGER},
+        expiration: {type: DataTypes.STRING, defaultValue: null}
     }, {
         timestamps: true,
         classMethods: {

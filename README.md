@@ -14,6 +14,7 @@
     + [3.1 Add item to list: [POST] `/v1/list/:listId/item/add`](#31-add-item-to-list-post-v1listlistiditemadd)
     + [3.2 Check off grocery item: [POST] `/v1/list/:listId/item/:itemId/done`](#32-check-off-grocery-item-post-v1listlistiditemitemiddone)
     + [3.3 Delete item from list: [POST] `/v1/list/:listId/item/:itemId/`](#33-delete-item-from-list-post-v1listlistiditemitemid)
+    + [3.4 Update expiration: [POST] `/v1/list/:listId/item/:itemId/update`](#34-update-expiration-post-v1listlistiditemitemidupdate)
 
 ## 1. Users
 ### 1.1 List all users: [GET] `/v1/users/`
@@ -171,6 +172,7 @@ Get specified list for a user.
             "name": [STRING],
             "quantity": [INTEGER],
             "price": [INTEGER],
+            "expiration": [STRING],
             "createdAt": [STRING],
             "updatedAt": [STRING],
             "listId": [INTEGER]
@@ -251,6 +253,7 @@ Add an item to the given list
                 "name": [STRING],
                 "quantity": [INTEGER],
                 "price": [INTEGER],
+                "expiration": [STRING],
                 "createdAt": [STRING],
                 "updatedAt": [STRING],
                 "listId": [INTEGER]
@@ -287,6 +290,7 @@ Move item from the grocery list to the fridge list
                 "name": [STRING],
                 "quantity": [INTEGER],
                 "price": [INTEGER],
+                "expiration": [STRING],
                 "createdAt": [STRING],
                 "updatedAt": [STRING],
                 "listId": [INTEGER]
@@ -300,7 +304,7 @@ Move item from the grocery list to the fridge list
 - Success Code: `{200: 'Success'}`
 - Error Code: `{403: 'Forbidden'}`
 
-### 3.3 Delete item from list: [POST] `/v1/list/:listId/item/:itemId/`
+### 3.3 Delete item from list: [DELETE] `/v1/list/:listId/item/:itemId/`
 #### Description
 Delete an item from a given list
 - Authentication: `[User]`
@@ -324,6 +328,50 @@ Delete an item from a given list
                 "name": [STRING],
                 "quantity": [INTEGER],
                 "price": [INTEGER],
+                "expiration": [STRING],
+                "createdAt": [STRING],
+                "updatedAt": [STRING],
+                "listId": [INTEGER]
+            },
+        ]
+    }
+}
+```
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
+
+### 3.4 Update expiration: [POST] `/v1/list/:listId/item/:itemId/update`
+#### Description
+Update an expiration date
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+- Body:
+```javascript
+{
+    "expiration": [STRING YYYY-MM-DD]
+}
+```
+
+#### Response:
+```javascript
+{
+    "list": {
+        "id": [INTEGER],
+        "name": [STRING],
+        "description": [STRING],
+        "createdAt": [STRING],
+        "updatedAt": [STRING],
+        "userId": [INTEGER],
+        "items": [
+            {
+                "id": [INTEGER],
+                "name": [STRING],
+                "quantity": [INTEGER],
+                "price": [INTEGER],
+                "expiration": [STRING],
                 "createdAt": [STRING],
                 "updatedAt": [STRING],
                 "listId": [INTEGER]

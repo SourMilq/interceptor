@@ -72,6 +72,35 @@ module.exports = function (listHelpers, itemHelpers) {
         }).catch(errors.ListNotFoundError, sendError(httpErrors.NotFoundError, next));
     };
 
+    var updateItem = function updateItem(req, res, next){
+        listHelpers.getListById(req.user, req.params.listId)
+            .then(function(lists) {
+                if (lists.length == 0){
+                    throw new errors.ListNotFoundError(req.params.listId);
+                } else {
+                    var list = lists[0];
+                    itemHelpers.getItemById(list, req.params.itemId).then(function(item){
+                        if (item.length === 0){
+                            throw new errors.ItemNotFoundError();
+                        }
+
+                        // Update
+                        item[0].expiration = req.body.expiration || null;
+
+                        // Save
+                        item[0].save().then(function(){
+                            listHelpers.getListById(req.user, list.id).then(function(lists){
+                                res.json(200, {
+                                    "list": lists[0]
+                                });
+                                next();
+                            });
+                        });
+                    }).catch(errors.ItemNotFoundError, sendError(httpErrors.NotFoundError, next));
+                }
+            }).catch(errors.ListNotFoundError, sendError(httpErrors.NotFoundError, next));
+    };
+
     var deleteItem = function deleteItem(req, res, next){
         listHelpers.getListById(req.user, req.params.listId)
             .then(function(lists) {
@@ -99,6 +128,7 @@ module.exports = function (listHelpers, itemHelpers) {
     return {
         addItem: addItem,
         moveItem: moveItem,
+        updateItem: updateItem,
         deleteItem: deleteItem
     };
 };
