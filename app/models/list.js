@@ -7,12 +7,6 @@ module.exports = function (sequelize, DataTypes) {
         description: {type: DataTypes.STRING},
     }, {
         timestamps: true,
-        classMethods: {
-            associate: function (sequelize, models) {
-                models.List.belongsTo(models.User);
-                models.List.hasMany(models.Item);
-            }
-        },
         indexes: [
             {fields: ['id'], method: 'BTREE'},
         ]

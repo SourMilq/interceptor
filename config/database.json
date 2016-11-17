@@ -2,8 +2,8 @@
   "local": {
     "host": "localhost",
     "user": "root",
-    "password": "password",
-    "database": "sourmilq",
+    "password": "",
+    "database": "sourMilqDb",
     "driver": "mysql"
   },
   "test": {

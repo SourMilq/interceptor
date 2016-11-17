@@ -14,11 +14,13 @@ var authenticationHelpers = require('./app/common/authentication')(config);
 var userHelpers = require('./app/helpers/userHelpers')(models, authenticationHelpers);
 var listHelpers = require('./app/helpers/listHelpers')(models, authenticationHelpers);
 var itemHelpers = require('./app/helpers/itemHelpers')(models, authenticationHelpers);
+var recipeHelpers = require('./app/helpers/recipeHelpers')(models, authenticationHelpers);
 
 // Functions to handle endpoint logic
 var userHandlers = require('./app/routes/userHandlers')(userHelpers, listHelpers, authenticationHelpers);
 var listHandlers = require('./app/routes/listHandlers')(listHelpers);
 var itemHandlers = require('./app/routes/itemHandlers')(listHelpers, itemHelpers);
+var recipeHandlers = require('./app/routes/recipeHandlers')(recipeHelpers);
 
 var passport = require('passport');
 
@@ -97,11 +99,14 @@ server.post('/v1/list/:listId/item/add', passport.authenticate(['basic', 'bearer
 server.post('/v1/list/:listId/item/:itemId/done', passport.authenticate(['basic', 'bearer'], {session: false}), itemHandlers.moveItem);
 server.del('/v1/list/:listId/item/:itemId', passport.authenticate(['basic', 'bearer'], {session: false}), itemHandlers.deleteItem);
 
+// Recipe
+server.post('/v1/recipe/upload', recipeHandlers.upload);
+
 sequelize.authenticate().then(function () {
     console.log('Connection has been established successfully');
     // use .sync{ force: true } to drop the db and make a new db from the schema
-    sequelize.sync().then(function () {
-    // sequelize.sync({force: true}).then(function () {
+    // sequelize.sync().then(function () {
+    sequelize.sync({force: true}).then(function () {
         server.listen(config.port, function () {
             console.log(' --- Listening to %s --- ', server.url);
         });

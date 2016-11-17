@@ -5,6 +5,7 @@ module.exports = function (sequelize) {
         User: sequelize.import(__dirname + "/user"),
         List: sequelize.import(__dirname + "/list"),
         Item: sequelize.import(__dirname + "/item"),
+        Recipe: sequelize.import(__dirname + "/recipe"),
     };
 
     Object.keys(models).forEach(function (modelName) {

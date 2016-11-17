@@ -65,9 +65,39 @@ class Purifier:
                 with open('./recipe/purified/'+fname, 'w') as outfile:
                     json.dump(result, outfile)
 
+class Uploader:
+    def _getFileNames(self):
+        return [f for f in listdir('./recipe/purified/') if isfile(join('./recipe/purified/', f))]
+
+    def upload(self):
+        onlyFiles = self._getFileNames()
+        headers = {'content-type': 'application/json'}
+        for fname in onlyFiles:
+            with open('./recipe/purified/'+fname) as data_file:
+                data = json.load(data_file)
+                result = {
+                    'title': data['title'] if 'title' in data else None,
+                    'text': data['text'] if 'text' in data else None,
+                    'cheap': data['cheap'] if 'cheap' in data else None,
+                    'extendedIngredients': ','.join([str(x) for x in data['extendedIngredients']]) if 'extendedIngredients' in data else None,
+                    'id': data['id'] if 'id' in data else None,
+                    'preparationMinutes': data['preparationMinutes'] if 'preparationMinutes' in data else None,
+                    'cookingMinutes': data['cookingMinutes'] if 'cookingMinutes' in data else None,
+                    'sourceUrl': data['sourceUrl'] if 'sourceUrl' in data else None,
+                    'vegetarian': data['vegetarian'] if 'vegetarian' in data else None,
+                    'vegan': data['vegan'] if 'vegan' in data else None,
+                    'dairyFree': data['dairyFree'] if 'dairyFree' in data else None,
+                }
+
+                pprint(result)
+
+                requests.post('http://localhost:3000/v1/recipe/upload', headers=headers, data=json.dumps(result))
+
 if __name__ == "__main__":
     # p = Parser(218586+200);
     # for i in range(0, 100):
     #     p.parse()
-    clean = Purifier();
-    clean.purify();
+    # clean = Purifier()
+    # clean.purify()
+    uploader = Uploader()
+    uploader.upload()
