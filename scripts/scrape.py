@@ -1,6 +1,10 @@
+from os import listdir
+from os.path import isfile, join
+from pprint import pprint
 import requests
 import urllib
 import json
+import glob
 
 class Parser:
     def __init__(self, start):
@@ -36,12 +40,34 @@ class Parser:
         with open(filename, 'w') as outfile:
             json.dump(data, outfile)
 
-# class Purifier:
-#     def __init__(self):
-#
-#     def
+class Purifier:
+    def _getFileNames(self):
+        return [f for f in listdir('./recipe/') if isfile(join('./recipe/', f))]
+    def purify(self):
+        onlyfiles = self._getFileNames()
+        for fname in onlyfiles:
+            with open('./recipe/'+fname) as data_file:
+                data = json.load(data_file)
+                result = {
+                    'title': data['title'] if 'title' in data else None,
+                    'text': data['text'] if 'text' in data else None,
+                    'cheap': data['cheap'] if 'cheap' in data else None,
+                    'extendedIngredients': data['extendedIngredients'] if 'extendedIngredients' in data else None,
+                    'id': data['id'] if 'id' in data else None,
+                    'preparationMinutes': data['preparationMinutes'] if 'preparationMinutes' in data else None,
+                    'cookingMinutes': data['cookingMinutes'] if 'cookingMinutes' in data else None,
+                    'sourceUrl': data['sourceUrl'] if 'sourceUrl' in data else None,
+                    'vegetarian': data['vegetarian'] if 'vegetarian' in data else None,
+                    'vegan': data['vegan'] if 'vegan' in data else None,
+                    'dairyFree': data['dairyFree'] if 'dairyFree' in data else None,
+                }
+
+                with open('./recipe/purified/'+fname, 'w') as outfile:
+                    json.dump(result, outfile)
 
 if __name__ == "__main__":
-    p = Parser(218586+200);
-    for i in range(0, 100):
-        p.parse()
+    # p = Parser(218586+200);
+    # for i in range(0, 100):
+    #     p.parse()
+    clean = Purifier();
+    clean.purify();

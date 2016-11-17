@@ -32,6 +32,7 @@ ngrok
 
 # json recipe files should not be committed
 scripts/recipe/*.json
+scripts/recipe/purified/*.json
 
 # web storm .idea
 .idea
