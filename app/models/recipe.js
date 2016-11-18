@@ -12,7 +12,9 @@ module.exports = function (sequelize, DataTypes) {
         dairyFree: {type: DataTypes.BOOLEAN},
         preparationMinutes: {type: DataTypes.INTEGER},
         extendedIngredients: {type: DataTypes.TEXT},
-        vegetarian: {type: DataTypes.BOOLEAN}
+        vegetarian: {type: DataTypes.BOOLEAN},
+        externalId: {type: DataTypes.INTEGER},
+        imageUrl: {type: DataTypes.STRING}
     }, {
         timestamps: true,
         indexes: [

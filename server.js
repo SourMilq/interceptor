@@ -102,6 +102,7 @@ server.del('/v1/list/:listId/item/:itemId', passport.authenticate(['basic', 'bea
 // Recipe
 server.post('/v1/recipe/upload', recipeHandlers.upload);
 server.get('/v1/recipe/', recipeHandlers.index);
+server.get('/v1/recipe/:id', recipeHandlers.view);
 
 sequelize.authenticate().then(function () {
     console.log('Connection has been established successfully');

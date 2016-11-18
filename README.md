@@ -406,6 +406,7 @@ Update an expiration date
             "cookingMinutes": [INTEGER],
             "title": [STRING],
             "dairyFree": [BOOLEAN],
+            "externalId": [INTEGER],
             "preparationMinutes": [INTEGER],
             "extendedIngredients": [STRING],
             "vegetarian": [BOOLEAN],

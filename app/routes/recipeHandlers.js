@@ -13,7 +13,12 @@ module.exports = function (recipeHelpers) {
             res.json({"recipes": recipes});
             next();
         });
-    }
+    };
+
+    var view = function view (req, res, next){
+        res.json({"status": "WIP"});
+        next();
+    };
 
     var upload = function upload(req, res, next){
         var recipeInfo = {
@@ -26,17 +31,20 @@ module.exports = function (recipeHelpers) {
             "dairyFree": req.body.dairyFree,
             "preparationMinutes": req.body.preparationMinutes,
             "extendedIngredients": req.body.extendedIngredients,
-            "vegetarian": req.body.vegetarian
+            "vegetarian": req.body.vegetarian,
+            "externalId": req.body.id,
+            "imageUrl": "https://spoonacular.com/recipeImages/" + req.body.id + "-556x370.jpg"
         }
 
         recipeHelpers.upload(recipeInfo).then(function(){
             res.json(200);
             next();
         });
-    }
+    };
 
     return {
         index: index,
+        view: view,
         upload: upload
     };
 };
