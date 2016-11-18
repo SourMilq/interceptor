@@ -79,7 +79,7 @@ class Uploader:
                     'title': data['title'] if 'title' in data else None,
                     'text': data['text'] if 'text' in data else None,
                     'cheap': data['cheap'] if 'cheap' in data else None,
-                    'extendedIngredients': ','.join([str(x) for x in data['extendedIngredients']]) if 'extendedIngredients' in data else None,
+                    'extendedIngredients': data['extendedIngredients'] if 'extendedIngredients' in data else None,
                     'id': data['id'] if 'id' in data else None,
                     'preparationMinutes': data['preparationMinutes'] if 'preparationMinutes' in data else None,
                     'cookingMinutes': data['cookingMinutes'] if 'cookingMinutes' in data else None,

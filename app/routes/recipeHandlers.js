@@ -30,6 +30,7 @@ module.exports = function (recipeHelpers) {
     };
 
     var upload = function upload(req, res, next){
+        console.log("BODY: ", req.body.extendedIngredients);
         var recipeInfo = {
             "sourceUrl": req.body.sourceUrl,
             "text": req.body.text,
@@ -39,7 +40,7 @@ module.exports = function (recipeHelpers) {
             "title": req.body.title,
             "dairyFree": req.body.dairyFree,
             "preparationMinutes": req.body.preparationMinutes,
-            "extendedIngredients": req.body.extendedIngredients,
+            "extendedIngredients": JSON.stringify({"ingredients": req.body.extendedIngredients}),
             "vegetarian": req.body.vegetarian,
             "externalId": req.body.id,
             "imageUrl": "https://spoonacular.com/recipeImages/" + req.body.id + "-556x370.jpg"
