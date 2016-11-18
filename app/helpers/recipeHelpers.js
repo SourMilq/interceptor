@@ -5,8 +5,8 @@ var errors = require('../common/errors');
 
 module.exports = function (models, authenticationHelpers) {
 
-    var getRecipes = function getRecipes(){
-        return models.Recipe.findAll();
+    var getRecipes = function getRecipes(options){
+        return models.Recipe.findAll(options || {});
     }
 
     var upload = function upload(recipeInfo){

@@ -9,7 +9,16 @@ var validateParams = require('../common/validateParams');
 module.exports = function (recipeHelpers) {
 
     var index = function index(req, res, next){
-        recipeHelpers.getRecipes().then(function(recipes){
+        var options = {};
+        if (req.query.offset !== undefined){
+            options["offset"] = req.query.offset
+        }
+
+        if (req.query.limit !== undefined){
+            options["limit"] = req.query.limit
+        }
+
+        recipeHelpers.getRecipes(options).then(function(recipes){
             res.json({"recipes": recipes});
             next();
         });
