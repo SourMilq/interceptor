@@ -107,8 +107,8 @@ server.get('/v1/recipe/:id', recipeHandlers.view);
 sequelize.authenticate().then(function () {
     console.log('Connection has been established successfully');
     // use .sync{ force: true } to drop the db and make a new db from the schema
-    sequelize.sync().then(function () {
-    // sequelize.sync({force: true}).then(function () {
+    // sequelize.sync().then(function () {
+    sequelize.sync({force: true}).then(function () {
         server.listen(config.port, function () {
             console.log(' --- Listening to %s --- ', server.url);
         });
