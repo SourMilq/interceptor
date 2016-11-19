@@ -102,9 +102,10 @@ server.del('/v1/list/:listId/item/:itemId', passport.authenticate(['basic', 'bea
 // Recipe
 server.post('/v1/recipe/upload', recipeHandlers.upload);
 server.get('/v1/recipe/', recipeHandlers.index);
-server.get('/v1/recipe/:id', recipeHandlers.view);
+// server.get('/v1/recipe/:id', recipeHandlers.view);
 server.get('/v1/recipe/:id/ingredients', passport.authenticate(['basic', 'bearer'], {session: false}), recipeHandlers.ingredients);
 server.get('/v1/recipe/:id/add', passport.authenticate(['basic', 'bearer'], {session: false}), recipeHandlers.add);
+server.get('/v1/recipe/suggest', passport.authenticate(['basic', 'bearer'], {session: false}), recipeHandlers.suggest);
 
 sequelize.authenticate().then(function () {
     console.log('Connection has been established successfully');

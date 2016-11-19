@@ -24,13 +24,49 @@ module.exports = function (models, authenticationHelpers) {
             if (recipe === null){
                 return {"ingredients": []};
             } else {
-                console.log("INGRE: ", recipe);
                 return JSON.parse(recipe.extendedIngredients);
             }
         });
     };
 
+    var haveItems = function haveItems(myItems, needed, percentage){
+        var intersecting = _.filter(needed, function(o){
+            if(_.indexOf(myItems, o) !== -1){
+                return true;
+            }
+        });
+
+        return (((intersecting.length * 100) / needed.length) >= percentage);
+    };
+
+    var getRecipesBasedOnIngredients = function getRecipesBasedOnIngredients(fIng, percentage){
+        // fIng - Fridge ingredients
+        // rIng - Recipe ingredients
+        var result = [];
+        fIng = _.map(fIng, function(o){
+            if (o.name){
+                return o.name;
+            }
+        });
+
+        // get all recipes
+        return getRecipes().then(function(recipes){
+            for (var i = 0; i < recipes.length; i++){
+                var rIng = JSON.parse(recipes[i].extendedIngredients);
+                rIng = _.map(rIng.ingredients, function(o){
+                    if (o.name){
+                        return o.name;
+                    }
+                });
+
+                if(haveItems(fIng, rIng, percentage || 100)){ result.push(recipes[i]); }
+            }
+            return result;
+        });
+    };
+
     return {
+        getRecipesBasedOnIngredients: getRecipesBasedOnIngredients,
         getRecipes: getRecipes,
         getIngredients: getIngredients,
         getRecipeById: getRecipeById,

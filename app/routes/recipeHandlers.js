@@ -86,10 +86,21 @@ module.exports = function (recipeHelpers, listHelpers, itemHelpers) {
         });
     };
 
+    var suggest = function suggest(req, res, next){
+        listHelpers.getFridgeList(req.user).then(function(fridgeList){
+            var items = fridgeList[0].items;
+            recipeHelpers.getRecipesBasedOnIngredients(items, req.query.q || 100).then(function(recipes){
+                res.json({"recipes": recipes});
+                next();
+            });
+        });
+    };
+
     return {
         index: index,
         view: view,
         add: add,
+        suggest: suggest,
         ingredients: ingredients,
         upload: upload
     };
