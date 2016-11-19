@@ -389,7 +389,7 @@ Update an expiration date
 - Error Code: `{403: 'Forbidden'}`
 
 ## 4. Recipes
-### 4.1 Get all the recipes in the system: [POST] `/v1/recipe/`
+### 4.1 Get all the recipes in the system: [GET] `/v1/recipe/`
 #### Description
 - Authentication: `[User]`
 
@@ -422,7 +422,7 @@ Update an expiration date
 - Success Code: `{200: 'Success'}`
 - Error Code: `{403: 'Forbidden'}`
 
-### 4.2 Get ingredients for recipe: [POST] `/v1/recipe/:id/ingredients`
+### 4.2 Get ingredients for recipe: [GET] `/v1/recipe/:id/ingredients`
 #### Description
 - Authentication: `[User]`
 
@@ -452,7 +452,7 @@ Update an expiration date
 - Success Code: `{200: 'Success'}`
 - Error Code: `{403: 'Forbidden'}`
 
-### 4.3 Add ingredients: [POST] `/v1/recipe/:id/add`
+### 4.3 Add ingredients: [GET] `/v1/recipe/:id/add`
 #### Description
 - Authentication: `[User]`
 
