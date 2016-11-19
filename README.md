@@ -389,8 +389,10 @@ Update an expiration date
 - Error Code: `{403: 'Forbidden'}`
 
 ## 4. Recipes
-### 4.1 Get all the recipes in the system: [GET] `/v1/recipe/`
+### 4.1 Get all the recipes in the system: [GET] `/v1/recipe[?offset=[INTEGER DEFAULT=0]&limit=[INGETER DEFAULT=300]]`
 #### Description
+- Offset `n` is the `n`th items you want to skip. Default = 0;
+- limit is the number of recipes you want. Default is all of them.
 - Authentication: `[User]`
 
 #### Request:
@@ -482,8 +484,44 @@ Update an expiration date
         }
     ]
 }
-
 ```
+
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
+
+
+### 4.4 Suggest recipes: [GET] `/v1/recipe/suggest[?q=[INTEGER 1-100] DEFAULT 100]`
+#### Description
+- Percentage is the percent of ingredients that must intersect for it to be in the resulting set
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+
+#### Response:
+```javascript
+{
+    "recipes": [
+        {
+            "id": [INTEGER],
+            "sourceUrl": [STRING],
+            "cheap": [BOOLEAN],
+            "vegan": [BOOLEAN],
+            "cookingMinutes": [INTEGER],
+            "title": [STRING],
+            "dairyFree": [BOOLEAN],
+            "externalId": [INTEGER],
+            "preparationMinutes": [INTEGER],
+            "extendedIngredients": [STRING],
+            "vegetarian": [BOOLEAN],
+            "createdAt": [STRING],
+            "updatedAt": [STRING]
+        },
+    ]
+}
+```
+
 #### Response Status Codes:
 - Success Code: `{200: 'Success'}`
 - Error Code: `{403: 'Forbidden'}`
