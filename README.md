@@ -16,9 +16,10 @@
     + [3.3 Delete item from list: [POST] `/v1/list/:listId/item/:itemId/`](#33-delete-item-from-list-post-v1listlistiditemitemid)
     + [3.4 Update expiration: [POST] `/v1/list/:listId/item/:itemId/update`](#34-update-expiration-post-v1listlistiditemitemidupdate)
   * [4. Recipes](#4-recipes)
-      + [4.1 Get all the recipes in the system: [POST] `/v1/recipe/`](#41-get-all-the-recipes-in-the-system-post-v1recipes)
-      + [4.2 Get ingredients for recipe: [POST] `/v1/recipe/:id/ingredients`](#42-get-ingredients-for-recipe-post-v1recipeidingredients)
-      + [4.3 Add ingredients: [POST] `/v1/recipe/:id/add`](#43-add-ingredients-post-v1recipeidadd)
+      + [4.1 Get all the recipes in the system: [GET] `/v1/recipe[?offset=[INTEGER DEFAULT=0]&limit=[INGETER DEFAULT=300]]`](#41-get-all-the-recipes-in-the-system-get-v1recipeoffsetinteger-default0limitingeter-default300)
+      + [4.2 Get ingredients for recipe: [GET] `/v1/recipe/:id/ingredients`](#42-get-ingredients-for-recipe-get-v1recipeidingredients)
+      + [4.3 Add ingredients: [GET] `/v1/recipe/:id/add`](#43-add-ingredients-get-v1recipeidadd)
+      + [4.4 Suggest recipes: [GET] `/v1/recipe/suggest[?q=[INTEGER 1-100] DEFAULT 100]`](#44-suggest-recipes-get-v1recipesuggestqinteger-1-100-default-100)
 
 ## 1. Users
 ### 1.1 List all users: [GET] `/v1/users/`
