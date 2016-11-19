@@ -40,19 +40,18 @@ module.exports = function (models, authenticationHelpers) {
     };
 
     var createList = function createList(user, listInfo){
-        return user.getLists({where: {name: listInfo.name}})
-            .then(function(list){
-                if (!_.isEmpty(list)){
-                    throw new errors.DuplicateListError(listInfo.name);
-                }
-                return models.List.create({
-                    name: listInfo.name,
-                    description: listInfo.description,
-                }).then(function(list){
-                    user.addList(list);
-                    return list;
-                });
+        return user.getLists({where: {name: listInfo.name}}).then(function(list){
+            if (!_.isEmpty(list)){
+                throw new errors.DuplicateListError(listInfo.name);
+            }
+            return models.List.create({
+                name: listInfo.name,
+                description: listInfo.description,
+            }).then(function(list){
+                user.addList(list);
+                return list;
             });
+        });
     };
 
     return {

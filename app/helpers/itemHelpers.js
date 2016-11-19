@@ -11,6 +11,12 @@ module.exports = function (models, authenticationHelpers) {
         return models.Item.create(itemInfo);
     };
 
+    var createItemForList = function createItemForList(list, itemInfo){
+        return createItem(itemInfo).then(function(item){
+            return list.addItem(item);
+        });
+    };
+
     var getItemById = function getItemById(list, itemId){
         return list.getItems(
             {
@@ -45,6 +51,7 @@ module.exports = function (models, authenticationHelpers) {
         createItem: createItem,
         getItemById: getItemById,
         getItemByName: getItemByName,
-        deleteItemById: deleteItemById
+        deleteItemById: deleteItemById,
+        createItemForList: createItemForList
     };
 };

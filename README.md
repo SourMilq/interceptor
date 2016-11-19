@@ -17,6 +17,8 @@
     + [3.4 Update expiration: [POST] `/v1/list/:listId/item/:itemId/update`](#34-update-expiration-post-v1listlistiditemitemidupdate)
   * [4. Recipes](#4-recipes)
       + [4.1 Get all the recipes in the system: [POST] `/v1/recipe/`](#41-get-all-the-recipes-in-the-system-post-v1recipes)
+      + [4.2 Get ingredients for recipe: [POST] `/v1/recipe/:id/ingredients`](#42-get-ingredients-for-recipe-post-v1recipeidingredients)
+      + [4.3 Add ingredients: [POST] `/v1/recipe/:id/add`](#43-add-ingredients-post-v1recipeidadd)
 
 ## 1. Users
 ### 1.1 List all users: [GET] `/v1/users/`
@@ -415,6 +417,72 @@ Update an expiration date
         },
     ]
 }
+```
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
+
+### 4.2 Get ingredients for recipe: [POST] `/v1/recipe/:id/ingredients`
+#### Description
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+
+#### Response:
+```javascript
+{
+    "ingredients": [
+        {
+          "originalString": [STRING],
+          "aisle": [STRING],
+          "name": [STRING],
+          "metaInformation": [ [STRING], ],
+          "image": [STRING],
+          "unitLong": [STRING],
+          "unitShort": [STRING],
+          "amount": [INTEGER],
+          "id": [INTEGER],
+          "unit": [STRING],
+        }
+    ]
+}
+```
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
+
+### 4.3 Add ingredients: [POST] `/v1/recipe/:id/add`
+#### Description
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+
+#### Response:
+```javascript
+{
+    "list": {
+    "id": [INTEGER],
+    "name": [STRING],
+    "description": [STRING],
+    "createdAt": [STRING],
+    "updatedAt": [STRING],
+    "userId": [INTEGER],
+    "items": [
+        {
+            "id": [INTEGER],
+            "name": [STRING],
+            "quantity": [INTEGER],
+            "price": [INTEGER],
+            "expiration": [STRING],
+            "createdAt": [STRING],
+            "updatedAt": [STRING],
+            "listId": [INTEGER]
+        }
+    ]
+}
+
 ```
 #### Response Status Codes:
 - Success Code: `{200: 'Success'}`

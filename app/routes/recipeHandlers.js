@@ -6,7 +6,7 @@ var errors = require('../common/errors');
 var sendError = require('../common/sendError');
 var validateParams = require('../common/validateParams');
 
-module.exports = function (recipeHelpers) {
+module.exports = function (recipeHelpers, listHelpers, itemHelpers) {
 
     var index = function index(req, res, next){
         var options = {};
@@ -52,9 +52,45 @@ module.exports = function (recipeHelpers) {
         });
     };
 
+    var ingredients = function ingredients(req, res, next){
+        var recipeId = req.params.id;
+
+        // get recipeById
+        recipeHelpers.getIngredients(recipeId).then(function(ingredients) {
+            res.json(ingredients);
+            next();
+        });
+    };
+
+    var add = function add(req, res, next){
+        var recipeId = req.params.id;
+        recipeHelpers.getIngredients(recipeId).then(function(ingredients) {
+            var o = ingredients.ingredients;
+            listHelpers.getGroceryList(req.user).then(function(list){
+                // TODO: assuming that grocery list exists
+                list = list[0];
+                for (var i = 0; i < o.length; i++){
+                    itemHelpers.createItemForList(list, {
+                        name: o[i].name || o[i].originalString,
+                        quantity: o[i].amount,
+                        price: 0,
+                        expiration: ""
+                    });
+                }
+
+                listHelpers.getGroceryList(req.user).then(function(list){
+                    res.json({"list": list[0]});
+                    next();
+                });
+            });
+        });
+    };
+
     return {
         index: index,
         view: view,
+        add: add,
+        ingredients: ingredients,
         upload: upload
     };
 };
