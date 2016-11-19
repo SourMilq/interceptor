@@ -419,3 +419,70 @@ Update an expiration date
 #### Response Status Codes:
 - Success Code: `{200: 'Success'}`
 - Error Code: `{403: 'Forbidden'}`
+### 4.2 Get ingredients for recipe: [POST] `/v1/recipe/:id/ingredients`
+#### Description
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+
+#### Response:
+```javascript
+{
+    "ingredients": [
+        {
+          "originalString": "3/4 cup peeled, seeded, and shredded cucumber",
+          "aisle": "Produce",
+          "name": "cucumber",
+          "metaInformation": [
+            "shredded",
+            "peeled",
+            "seeded"
+          ],
+          "image": "https://spoonacular.com/cdn/ingredients_100x100/cucumber.jpg",
+          "unitLong": "cups",
+          "unitShort": "c",
+          "amount": 0.75,
+          "id": 11206,
+          "unit": "cup"
+        }
+    ]
+}
+```
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
+### 4.2 Add ingredients: [POST] `/v1/recipe/:id/add`
+#### Description
+- Authentication: `[User]`
+
+#### Request:
+- Header: `{'Authorization': 'Bearer TOKEN'}`
+
+#### Response:
+```javascript
+{
+    "list": {
+    "id": 2,
+    "name": "Grocery List",
+    "description": "Default shopping list.",
+    "createdAt": "2016-11-19T07:43:03.000Z",
+    "updatedAt": "2016-11-19T07:43:03.000Z",
+    "userId": 1,
+    "items": [
+        {
+            "id": 1,
+            "name": "olive oil",
+            "quantity": 1,
+            "price": 0,
+            "expiration": "",
+            "createdAt": "2016-11-19T08:08:37.000Z",
+            "updatedAt": "2016-11-19T08:08:37.000Z",
+            "listId": 2
+        }
+    ]
+}
+```
+#### Response Status Codes:
+- Success Code: `{200: 'Success'}`
+- Error Code: `{403: 'Forbidden'}`
