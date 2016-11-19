@@ -30,13 +30,11 @@ module.exports = function (models, authenticationHelpers) {
     };
 
     var haveItems = function haveItems(myItems, needed, percentage){
-        var intersecting = _.filter(needed, function(o){
+        return ((_.filter(needed, function(o){
             if(_.indexOf(myItems, o) !== -1){
                 return true;
             }
-        });
-
-        return (((intersecting.length * 100) / needed.length) >= percentage);
+        }).length * 100) / needed.length) >= percentage;
     };
 
     var getRecipesBasedOnIngredients = function getRecipesBasedOnIngredients(fIng, percentage){
@@ -59,7 +57,7 @@ module.exports = function (models, authenticationHelpers) {
                     }
                 });
 
-                if(haveItems(fIng, rIng, percentage || 100)){ result.push(recipes[i]); }
+                if(haveItems(fIng, rIng, percentage)){ result.push(recipes[i]); }
             }
             return result;
         });
